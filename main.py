@@ -3,7 +3,9 @@ import taichi as ti
 from vector import *
 import ray
 from time import time
-from hittable import World, Sphere
+
+# from hittable import World, Sphere
+from world import World, Sphere
 from camera import Camera
 from material import *
 import math
@@ -18,9 +20,9 @@ if __name__ == "__main__":
     # materials
     mat_ground = Lambert([0.5, 0.5, 0.5])
     mat2 = Lambert([0.4, 0.2, 0.2])
-    mat4 = Dielectric(1.5)
     mat3 = Metal([0.7, 0.6, 0.5], 0.0)
-    mat4 = Gaussian6D()
+    mat4 = Dielectric(1.5)
+    # mat4 = Gaussian6D()
 
     # world
     R = math.cos(math.pi / 4.0)
@@ -53,9 +55,9 @@ if __name__ == "__main__":
 
             world.add(Sphere(center, 0.2, mat))
 
+    world.add(Sphere([-4.0, 1.0, 0.0], 1.0, mat2))
     world.add(Sphere([0.0, 1.0, 0.0], 1.0, mat4))
-    world.add(Sphere([-4.0, 1.0, 0.0], 1.0, mat4))
-    world.add(Sphere([4.0, 1.0, 0.0], 1.0, mat4))
+    world.add(Sphere([4.0, 1.0, 0.0], 1.0, mat3))
     world.commit()
 
     # camera
